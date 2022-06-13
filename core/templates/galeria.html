@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Galeria de productos</title>
+    <!-- cargando carpeta static -->
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/estilos.css' %}"
+    />
+    <!--HTML5-->
+    <meta charset="utf-8" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--Jquery-Formulario -->
+    <script>
+      $(document).ready(function () {
+        $("#formulario-modal").validate({
+          rules: {
+            email: {
+              required: true,
+              email: true,
+            },
+            password: {
+              required: true,
+            },
+            password2: {
+              required: true,
+              equalTo: "#password",
+            },
+          },
+          messages: {
+            email: {
+              required: "Ingresa tu correo electrónico",
+              email: "Formato de correo no válido",
+            },
+            password: {
+              required: "Ingresa una contraseña",
+              minlength:
+                "Para crear una contraseña, utilice a lo menos 8 caracteres.",
+            },
+            password2: {
+              required: "Reingresa la contraseña",
+              equalTo: "Las contraseñas ingresadas no coinciden",
+              minlength:
+                "Para crear una contraseña, utilice a lo menos 8 caracteres.",
+            },
+          },
+          submitHandler: function (form) {
+            alert(
+              "Te acabas de registrar en nuestra tienda. Cuando compres, recuerda ingresar uno de los codigos incluidos en los mails que te enviaremos una vez al mes."
+            );
+          },
+        });
+      });
+    </script>
+
+    <!--JAVASCRIPT: FUNCIONES QUE DEBEN SER CARGADAS DESDE AQUI-->
+    <script>
+      const dibujadoraDeTablaEnCarrito = () => {
+        let dibujadora = obtenerElListadoDeProductosEnElCarrito();
+        if (dibujadora.length === 0) {
+          return;
+        }
+        //limpio la tabla, así no habrá duplicidad de filas.
+        $("#tablaDelCarrito").find("tbody tr").remove();
+
+        let count = 1;
+        let totalAPagar = 0;
+        for (const element of dibujadora) {
+          $("#tablaDelCarrito")
+            .find("tbody")
+            .append(
+              "<tr>" +
+                '<th scope="row">' +
+                count +
+                "</th>" +
+                "<td>" +
+                element.nombre +
+                "</td>" +
+                "<td>" +
+                element.cantidad +
+                "</td>" +
+                "<td>" +
+                element.precioUnitario +
+                "</td>" +
+                "<td>" +
+                element.precioPorCantidad +
+                "</td>" +
+                "</tr>"
+            );
+          totalAPagar = totalAPagar + element.precioPorCantidad;
+          count++;
+        }
+
+        $("#tablaDelCarrito")
+          .find("tbody")
+          .append(
+            "<tr>" +
+              '<th style="border-bottom:0px" scope="row"></th>' +
+              '<td style="border-bottom:0px"></td>' +
+              '<td style="border-bottom:0px"></td>' +
+              '<td class="totalEnTabla" style="background-color:lightgrey;">Total:</td>' +
+              '<td class="totalEnTabla" style="background-color:lightgrey;">' +
+              totalAPagar +
+              "</td>" +
+              "</tr>"
+          );
+      };
+    </script>
+  </head>
+  <body>
+    <!-- NavBar-->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#opciones"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- logo -->
+      <a class="navbar-brand" href="#">
+        <img
+          id="logo"
+          src="{% static 'img/logo.jpg' %}"
+          width="30"
+          height="30"
+          alt=""
+        />
+      </a>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="opciones">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'galeria' %}"
+              >Galeria de productos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'somos' %}">Quienes somos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contacto' %}">Contactanos</a>
+          </li>
+          <li>
+            <text>Bienvenido a Art Plants</text>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- CONTENIDO DE GALERIA.HTML-->
+
+    <!-- Título y boton de carrito-->
+    <h1>Galeria de productos</h1>
+
+    <button
+      id="botonAbrecarrito"
+      data-toggle="modal"
+      data-target="#modalCarrito"
+      onclick="dibujadoraDeTablaEnCarrito()"
+    >
+      Comprar carrito
+    </button>
+
+    <!-- Grid de productos-->
+    <div id="tabla-precios">
+      <!-- Item 1 -->
+      <div class="precio-col">
+        <div class="precio-col-header">
+          <p id="productoPrecio1" style="font-size: 26px; margin-bottom: 0px">
+            $15.000
+          </p>
+          <p id="productoNombre1">Producto 1</p>
+        </div>
+        <div class="precio-col-features">
+          <img src="{% static 'img/repizas.jpg' %}" />
+          <p>Producto 1</p>
+          <button
+            class="botonAleatorio"
+            data-dismiss="modal"
+            onclick="agregarAlCarrito(productoNombre1, productoPrecio1)"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
+      <!-- Item 2 -->
+      <div class="precio-col">
+        <div class="precio-col-header">
+          <p id="productoPrecio2" style="font-size: 26px; margin-bottom: 0px">
+            $5.000
+          </p>
+          <p id="productoNombre2">Repisa 2</p>
+        </div>
+        <div class="precio-col-features">
+          <img src="{% static 'img/repizas.jpg' %}" />
+          <p>Repisa 2</p>
+          <button
+            class="botonAleatorio"
+            data-dismiss="modal"
+            onclick="agregarAlCarrito(productoNombre2, productoPrecio2)"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
+      <!-- Item 3 -->
+      <div class="precio-col">
+        <div class="precio-col-header">
+          <p id="productoPrecio3" style="font-size: 26px; margin-bottom: 0px">
+            $8.000
+          </p>
+          <p id="productoNombre3">Repisa 3</p>
+        </div>
+        <div class="precio-col-features">
+          <img src="{% static 'img/repizas.jpg' %}" />
+          <p>Repisa 3</p>
+          <button
+            class="botonAleatorio"
+            data-dismiss="modal"
+            onclick="agregarAlCarrito(productoNombre3, productoPrecio3)"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
+      <!-- Item 4 -->
+      <div class="precio-col">
+        <div class="precio-col-header">
+          <p id="productoPrecio4" style="font-size: 26px; margin-bottom: 0px">
+            $3.990
+          </p>
+          <p id="productoNombre4">Repisa 4</p>
+        </div>
+        <div class="precio-col-features">
+          <img src="{% static 'img/repizas.jpg' %}" />
+          <p>Repisa 4</p>
+          <button
+            class="botonAleatorio"
+            data-dismiss="modal"
+            onclick="agregarAlCarrito(productoNombre4, productoPrecio4)"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
+      <!-- Item 5 -->
+      <div class="precio-col">
+        <div class="precio-col-header">
+          <p id="productoPrecio5" style="font-size: 26px; margin-bottom: 0px">
+            $6.990
+          </p>
+          <p id="productoNombre5">Repisa 5</p>
+        </div>
+        <div class="precio-col-features">
+          <img src="{% static 'img/repizas.jpg' %}" />
+          <p>Repisa 5</p>
+          <button
+            class="botonAleatorio"
+            data-dismiss="modal"
+            onclick="agregarAlCarrito(productoNombre5, productoPrecio5)"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
+      <!-- Item 6 -->
+      <div class="precio-col">
+        <div class="precio-col-header">
+          <p id="productoPrecio6" style="font-size: 26px; margin-bottom: 0px">
+            $49.990
+          </p>
+          <p id="productoNombre6">Repisa Bamboo multiuso</p>
+        </div>
+        <div class="precio-col-features">
+          <img src="{% static 'img/rack-bamboo-multiuso.jpg' %}" />
+          <p>Repisa 6</p>
+          <button
+            class="botonAleatorio"
+            data-dismiss="modal"
+            onclick="agregarAlCarrito(productoNombre6, productoPrecio6)"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
+      <!-- Item 7 -->
+      <div class="precio-col">
+        <div class="precio-col-header">
+          <p id="productoPrecio7" style="font-size: 26px; margin-bottom: 0px">
+            $79.990
+          </p>
+          <p id="productoNombre7">Repisa exclusive</p>
+        </div>
+        <div class="precio-col-features">
+          <img src="{% static 'img/repizas.jpg' %}" />
+          <p>Repisa 7</p>
+          <button
+            class="botonAleatorio"
+            data-dismiss="modal"
+            onclick="agregarAlCarrito(productoNombre7, productoPrecio7)"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
+      <!-- Item 8 -->
+      <div class="precio-col">
+        <div class="precio-col-header">
+          <p id="productoPrecio8" style="font-size: 26px; margin-bottom: 0px">
+            $129.990
+          </p>
+          <p id="productoNombre8">Repisa elite</p>
+        </div>
+        <div class="precio-col-features">
+          <img src="{% static 'img/repisaelite.jpeg' %}" />
+          <p>Repisa 8</p>
+          <button
+            class="botonAleatorio"
+            data-dismiss="modal"
+            onclick="agregarAlCarrito(productoNombre8, productoPrecio8)"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer-->
+    <footer class="bg-dark text-center text-white">
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        Cristóbal Ignacio Sepúlveda Silva © 2022 Copyright: Derechos Reservados
+        <!-- Facebook -->
+        <a
+          class="btn btn-outline-light btn-floating m-1"
+          href="#!"
+          role="button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-facebook"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"
+            />
+          </svg>
+        </a>
+        <!-- Twitter -->
+        <a
+          class="btn btn-outline-light btn-floating m-1"
+          href="#!"
+          role="button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-twitter"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
+            />
+          </svg>
+        </a>
+        <!-- Instagram -->
+        <a
+          class="btn btn-outline-light btn-floating m-1"
+          href="#!"
+          role="button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-instagram"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+            />
+          </svg>
+        </a>
+      </div>
+    </footer>
+
+    <!-- Modal Carrito -->
+    <div class="modal fade" id="modalCarrito" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal BOX-->
+        <div class="modal-content">
+          <!--Modal Header-->
+          <div id="modalHeader" class="modal-header">
+            <h4 class="modal-title">Estas a un paso de confirmar tu pedido</h4>
+            <button
+              id="botonX"
+              type="button"
+              class="close"
+              data-dismiss="modal"
+            >
+              &times;
+            </button>
+          </div>
+
+          <!--Modal Body-->
+          <div class="modal-body">
+            <!--Título del carrito-->
+            <p style="text-align: center; font-size: 25px">
+              Listado de productos
+            </p>
+            <button onclick="requestAAPI(document)">ValorUF</button>
+            <label>Precio UF: </label>
+            <p id="precioUF"></p>
+            <!--Formulario-->
+            <div class="table-responsive">
+              <table id="tablaDelCarrito" class="table table-sm">
+                <!--Encabezados de la tabla-->
+                <thead style="background-color: lightgrey">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio unitario</th>
+                    <th scope="col">Precio por productos</th>
+                  </tr>
+                </thead>
+
+                <!--Contenido del precio por el carrito-->
+                <tbody></tbody>
+              </table>
+            </div>
+            <img
+              id="imagenCarrito"
+              src="{% static 'img/logo.jpg' %}"
+              style="width: 80%; height: 350px; border-radius: 10px"
+              class="center"
+              onmouseenter="desapareceImagen(document)"
+              onmouseleave="reapareceImagen(document)"
+            />
+            <!--Botones del carrito-->
+            <div class="botonesModal">
+              <button class="botonAleatorio" onclick="irATransbank()">
+                Pagar
+              </button>
+              <button type="button" class="botonAleatorio" data-dismiss="modal">
+                Volver
+              </button>
+            </div>
+          </div>
+
+          <!--Modal Footer-->
+          <!-- <div class="modal-footer">
+                <button type="button" class="botonAleatorio" data-dismiss="modal">Volver</button>
+                </div> -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

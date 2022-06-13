@@ -1,0 +1,222 @@
+/* label{
+    color:red
+} */
+#logo{
+    margin-left: 24px;
+}
+#botonX{
+  position:absolute;
+  right:0;
+  margin-right: 20px;
+  border-radius: 10%;
+}
+#modalHeader{
+  height:40px;
+  color:white;
+  background-color: black ;
+}
+#imagenUnica {
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    display: block;
+  }
+
+  #formButtons {
+    display: inline-flex;
+    clear: both;
+    float: left;
+  }
+
+.botonesModal{
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;      
+}
+.botonAleatorio{
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 1.3px;
+  background-color: #4802c9ee;
+  padding: 9px;
+  padding-left: 19px;
+  padding-right: 17px;
+  border: solid 0px #eee;
+  border-radius: 4px;
+  color:white;
+}
+
+.center{
+  display: block;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+body{
+  background-color: #f8f5c7;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  margin-bottom: 40px;
+  
+}
+
+
+
+footer {
+  background-color: black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  color: white;
+}
+
+/*Estos son para el modal */
+hr{
+  color: white;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input {
+  float: left;
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+label {
+  clear: both;
+  float: left;
+  width: 180px;
+}
+
+textarea{
+  float: left;
+  width: 200px;
+  max-height: 100px;
+  margin-bottom: 10px;
+}
+h4{
+  font-size:16px;
+  position:absolute;
+  left:0;
+  margin-left: 20px;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+text {
+  color: white;
+  font-size: 20px;
+  margin-left: 30px;
+  text-align: center;
+}
+h1 {
+  text-align: center;
+  color: #4802c9ee;
+  margin-top: 10px;
+}
+#botonAbrecarrito {
+  right: 0;
+  top: 0;
+  position: absolute;
+  margin-top: 13px;
+  margin-right: 20px;
+}
+#tabla-precios {
+  display: block;
+  width: 50%;
+  margin-top: 24px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.totalEnTabla {
+  border-left-width: 2px;
+  border-right-width: 2px;
+  border-top: 2px;
+}
+
+.precio-col {
+  display: inline-block;
+  background-color: #f3f3f3;
+  text-align: center;
+  width: 30%;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: black;
+}
+
+.precio-col-header {
+  background-color: yellowgreen;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.precio-col-header h3 {
+  color: #f3f3f3;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.precio-col-header p {
+  color: #f3f3f3;
+  font-size: 14px;
+}
+
+.precio-col-features {
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.precio-col-features img {
+  width: 100%;
+  height: 150px;
+}
+.precio-col-features p {
+  margin-top: 5px;
+}
+.precio-col-features button {
+  width: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#imgsMasPs {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.item {
+  height: 150px;
+  width: 150px !important;
+  display: block;
+  padding-bottom: 250px;
+}
+.imgItem {
+  height: 150px;
+  width: 150px !;
+}
+.subtitle {
+  font-size: 12px;
+  color: red;
+}
+
+
+
+      
