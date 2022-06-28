@@ -41,31 +41,38 @@
       $(function () {
         $("#formulario").validate({
           rules: {
-            nombre: {
-              required: true,
-            },
             rut: {
               required: true,
             },
-            direccion: {
+            nombre: {
               required: true,
             },
+            correo: {
+              required: true,
+              email: true,
+            },
             telefono: {
+              required: true,
+            },
+            direccion: {
               required: true,
             },
           },
           messages: {
-            nombre: {
-              required: "Ingrese nombre del cliente ",
-            },
             rut: {
               required: "Ingrese rut del cliente",
             },
-            direccion: {
-              required: "Ingrese direccion del cliente",
+            nombre: {
+              required: "Ingrese nombre del cliente ",
+            },
+            correo: {
+              required: "Ingrese correo del cliente",
             },
             telefono: {
               required: "Ingrese telefono del cliente",
+            },
+            direccion: {
+              required: "Ingrese direccion del cliente",
             },
           },
         });
@@ -82,7 +89,7 @@
           {% csrf_token %}
 
           <div class="form-group">
-            {{ cliente_form.idCliente.label}} {{ cliente_form.idCliente}}
+            {{ cliente_form.rut.label}} {{ cliente_form.rut}}
           </div>
 
           <div class="form-group">
@@ -90,13 +97,15 @@
           </div>
 
           <div class="form-group">
-            {{ cliente_form.rut.label}} {{ cliente_form.rut}}
+            {{ cliente_form.correo.label}} {{ cliente_form.correo}}
           </div>
-          <div class="form-group">
-            {{ cliente_form.direccion.label}} {{ cliente_form.direccion}}
-          </div>
+
           <div class="form-group">
             {{ cliente_form.telefono.label}} {{ cliente_form.telefono}}
+          </div>
+
+          <div class="form-group">
+            {{ cliente_form.direccion.label}} {{ cliente_form.direccion}}
           </div>
 
           <br /><br />

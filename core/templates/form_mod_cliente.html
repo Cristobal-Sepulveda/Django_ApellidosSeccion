@@ -45,13 +45,14 @@
             nombre: {
               required: true,
             },
-            rut: {
+            correo: {
+              required: true,
+              email: true,
+            },
+            telefono: {
               required: true,
             },
             direccion: {
-              required: true,
-            },
-            telefono: {
               required: true,
             },
           },
@@ -59,14 +60,14 @@
             nombre: {
               required: "Ingrese nombre del cliente ",
             },
-            rut: {
-              required: "Ingrese rut del cliente",
-            },
-            direccion: {
-              required: "Ingrese direccion del cliente",
+            correo: {
+              required: "Ingrese correo del cliente",
             },
             telefono: {
               required: "Ingrese telefono del cliente",
+            },
+            direccion: {
+              required: "Ingrese direccion del cliente",
             },
           },
         });
@@ -80,11 +81,11 @@
       <form method="post" action="#" id="formulario">
         {% csrf_token %}
         <div class="form-group">{{form.nombre.label}} {{form.nombre}}</div>
-        <div class="form-group">{{form.rut.label}} {{form.rut}}</div>
+        <div class="form-group">{{form.correo.label}} {{form.correo}}</div>
+        <div class="form-group">{{form.telefono.label}} {{form.telefono}}</div>
         <div class="form-group">
           {{form.direccion.label}} {{form.direccion}}
         </div>
-        <div class="form-group">{{form.telefono.label}} {{form.telefono}}</div>
         <br /><br />
         <input type="submit" class="btn btn-primary" value="Modificar" />
         <a href="{% url 'clientes' %}" class="btn btn-success">Volver</a>

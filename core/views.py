@@ -78,7 +78,7 @@ def form_crear_cliente(request):
     return render(request, 'form_crear_cliente.html', {'cliente_form': cliente_form})
 
 def form_mod_cliente(request, id):
-    cliente = Cliente.objects.get(idCliente=id)
+    cliente = Cliente.objects.get(rut=id)
     datos = {
         'form': ClienteForm(instance = cliente)
     }
@@ -90,6 +90,6 @@ def form_mod_cliente(request, id):
     return render(request, 'form_mod_cliente.html', datos)
 
 def form_del_cliente(request, id):
-    cliente = Cliente.objects.get(idCliente=id)
+    cliente = Cliente.objects.get(rut=id)
     cliente.delete()
     return redirect('clientes')

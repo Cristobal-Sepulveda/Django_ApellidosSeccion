@@ -51,21 +51,15 @@ class ClienteForm(forms.ModelForm):
 
     class Meta: 
         model= Cliente
-        fields = ['nombre', 'rut', 'direccion', 'telefono']
+        fields = ['rut', 'nombre', 'correo' , 'telefono', 'direccion']
         labels ={
-            'nombre': 'Nombre', 
             'rut': 'rut', 
-            'direccion': 'direccion',
+            'nombre': 'Nombre', 
+            'correo': 'Correo',
             'telefono': 'telefono',
+            'direccion': 'direccion',
         }
         widgets={
-            'nombre': forms.TextInput(
-                attrs={
-                    'class': 'form-control', 
-                    'placeholder': 'Ingrese nombre', 
-                    'id': 'nombre'
-                }
-            ), 
             'rut': forms.TextInput(
                 attrs={
                     'class': 'form-control', 
@@ -73,6 +67,27 @@ class ClienteForm(forms.ModelForm):
                     'id': 'rut'
                 }
             ), 
+            'nombre': forms.TextInput(
+                attrs={
+                    'class': 'form-control', 
+                    'placeholder': 'Ingrese nombre', 
+                    'id': 'nombre'
+                }
+            ), 
+            'correo': forms.TextInput(
+                attrs={
+                    'class': 'form-control', 
+                    'placeholder': 'Ingrese correo', 
+                    'id': 'correo'
+                }
+            ), 
+            'telefono': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese telefono',
+                    'id': 'telefono',
+                }
+            ),
             'direccion': forms.TextInput(
                 attrs={
                     'class': 'form-control',
@@ -80,13 +95,6 @@ class ClienteForm(forms.ModelForm):
                     'id': 'direccion',
                 }
             ),
-            'telefono': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese telefono',
-                    'id': 'telefono',
-                }
-            )
 
         }
 
