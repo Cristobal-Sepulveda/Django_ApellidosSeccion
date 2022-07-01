@@ -57,6 +57,9 @@
             direccion: {
               required: true,
             },
+            contraseña: {
+              required: true,
+            },
           },
           messages: {
             rut: {
@@ -73,6 +76,9 @@
             },
             direccion: {
               required: "Ingrese direccion del cliente",
+            },
+            contraseña: {
+              required: "Ingrese contraseña de nueva cuenta",
             },
           },
         });
@@ -106,6 +112,10 @@
 
           <div class="form-group">
             {{ cliente_form.direccion.label}} {{ cliente_form.direccion}}
+          </div>
+
+          <div class="form-group">
+            {{ cliente_form.contraseña.label}} {{ cliente_form.contraseña}}
           </div>
 
           <br /><br />

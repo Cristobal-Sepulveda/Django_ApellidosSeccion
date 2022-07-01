@@ -70,7 +70,6 @@ def form_crear_cliente(request):
     if request.method=='POST':
         cliente_form = ClienteForm(request.POST)
         if cliente_form.is_valid():
-
             cliente_form.save()        #similar al insert
             return redirect('clientes')
     else:
@@ -93,3 +92,4 @@ def form_del_cliente(request, id):
     cliente = Cliente.objects.get(rut=id)
     cliente.delete()
     return redirect('clientes')
+

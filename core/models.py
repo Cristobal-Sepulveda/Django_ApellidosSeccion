@@ -10,10 +10,11 @@ class Cliente(models.Model):
     correo = models.CharField(max_length=50, verbose_name="correo")
     telefono = models.CharField(max_length=15, verbose_name="telefono")
     direccion = models.CharField(max_length=30, verbose_name="direccion")
+    contraseña = models.CharField(max_length=20, verbose_name="contraseña")
 
     def __str__(self):
         return self.rut
-        
+       
 class Producto(models.Model):
     idProducto = models.IntegerField(primary_key=True, verbose_name='Id del Producto')
     nombre = models.CharField(max_length=20, verbose_name='Nombre')

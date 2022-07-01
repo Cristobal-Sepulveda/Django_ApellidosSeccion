@@ -7,7 +7,6 @@ from . models import Producto, Cliente
 
 
 class ProductoForm(forms.ModelForm):
-
     class Meta: 
         model= Producto
         fields = ['nombre', 'precio', 'descripcion', 'imagen']
@@ -51,13 +50,14 @@ class ClienteForm(forms.ModelForm):
 
     class Meta: 
         model= Cliente
-        fields = ['rut', 'nombre', 'correo' , 'telefono', 'direccion']
+        fields = ['rut', 'nombre', 'correo' , 'telefono', 'direccion', 'contraseña']
         labels ={
             'rut': 'rut', 
             'nombre': 'Nombre', 
             'correo': 'Correo',
             'telefono': 'telefono',
             'direccion': 'direccion',
+            'contraseña': 'contraseña'
         }
         widgets={
             'rut': forms.TextInput(
@@ -95,10 +95,14 @@ class ClienteForm(forms.ModelForm):
                     'id': 'direccion',
                 }
             ),
+            'contraseña': forms.PasswordInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese contraseña',
+                    'id':'contraseña'
+                }
+            ),
 
         }
 
  
-    
-     
-
