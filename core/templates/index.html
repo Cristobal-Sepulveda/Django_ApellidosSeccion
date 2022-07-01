@@ -192,6 +192,7 @@
           >Gestionar Productos</a
         >
       </div>
+
       <div style="display: grid">
         <a href="#">Bienvenido @{{user.username}}</a>
         <div>
@@ -203,6 +204,7 @@
       <div>
         <a href="{% url 'logout' %}" class="btn btn-primary">Cerrar Sesión</a>
       </div>
+
       {% else %}
       <div>
         <a href="{% url 'login' %}" class="btn btn-primary">Iniciar Sesión</a>

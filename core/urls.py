@@ -18,7 +18,8 @@ urlpatterns=[
     path("clientes/", clientes, name="clientes"),
     path("form_crear_cliente/", form_crear_cliente, name='form_crear_cliente'),
     path("form_mod_cliente/<id>", form_mod_cliente, name='form_mod_cliente'),
-    path("form_del_cliente/<id>", form_del_cliente, name='form_del_cliente')
+    path("form_del_cliente/<id>", form_del_cliente, name='form_del_cliente'),
+    path('login', login, name="login"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

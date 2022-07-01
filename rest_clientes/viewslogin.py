@@ -9,9 +9,8 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.authtoken.models import Token
 
 @api_view(['POST'])
-def login(request):
+def login_api(request):
     data = JSONParser().parse(request)
-
     username = data['username']
     password = data['password']
     try:
