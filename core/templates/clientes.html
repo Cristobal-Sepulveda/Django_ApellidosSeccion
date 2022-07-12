@@ -42,6 +42,7 @@
             <th>Correo</th>
             <th>Teléfono</th>
             <th>Dirección</th>
+            <th>Contraseña</th>
             <th>Modificar Cliente</th>
             <th>Eliminar Cliente</th>
           </tr>
@@ -54,7 +55,8 @@
             <td>{{ cliente.correo }}</td>
             <td>{{ cliente.telefono }}</td>
             <td>{{ cliente.direccion }}</td>
-            {% if user.is_authenticated %}
+            <td>{{ cliente.contraseña }}</td>
+            {% if user.is_authenticated and user.is_superuser %}
             <td>
               <a
                 href="{% url 'form_mod_cliente' cliente.rut %}"

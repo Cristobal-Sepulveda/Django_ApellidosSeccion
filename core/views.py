@@ -18,8 +18,8 @@ def contacto(request):
 def modal(request):
     return render(request, 'modal.html')
 
-def login(request):
-    return render(request, 'login.html')
+def form_login(request):
+    return render(request, 'form_login.html')
 
 def productos(request):
     productos = Producto.objects.all()

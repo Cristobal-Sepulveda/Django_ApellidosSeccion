@@ -105,4 +105,31 @@ class ClienteForm(forms.ModelForm):
 
         }
 
+
+class LoginForm(forms.ModelForm):
+
+    class Meta: 
+        fields = ['correo', 'contraseña']
+        labels ={
+            'correo': 'Correo',
+            'contraseña': 'contraseña'
+        }
+        widgets={
+            'correo': forms.TextInput(
+                attrs={
+                    'class': 'form-control', 
+                    'placeholder': 'Ingrese correo', 
+                    'id': 'correo'
+                }
+            ), 
+            'contraseña': forms.PasswordInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese contraseña',
+                    'id':'contraseña'
+                }
+            ),
+
+        }
+
  

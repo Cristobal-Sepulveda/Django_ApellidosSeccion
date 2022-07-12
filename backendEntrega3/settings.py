@@ -88,16 +88,16 @@ WSGI_APPLICATION = 'backendEntrega3.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-    'default':{
-    'ENGINE':'django.db.backends.oracle',
-    'NAME':'db01_high',
-    'USER':'ADMIN', 
-    'PASSWORD':'977614Asdf1234',#Please provide the db password here
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default':{
+    # 'ENGINE':'django.db.backends.oracle',
+    # 'NAME':'db01_high',
+    # 'USER':'ADMIN', 
+    # 'PASSWORD':'977614Asdf1234',#Please provide the db password here
+    # }
 }
 
 

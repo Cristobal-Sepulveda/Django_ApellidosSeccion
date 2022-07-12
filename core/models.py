@@ -10,7 +10,7 @@ class Cliente(models.Model):
     correo = models.CharField(max_length=50, verbose_name="correo")
     telefono = models.CharField(max_length=15, verbose_name="telefono")
     direccion = models.CharField(max_length=30, verbose_name="direccion")
-    contraseña = models.CharField(max_length=20, verbose_name="contraseña")
+    contraseña = models.CharField(max_length=20, verbose_name="contraseña",blank=True, null=True)
 
     def __str__(self):
         return self.rut

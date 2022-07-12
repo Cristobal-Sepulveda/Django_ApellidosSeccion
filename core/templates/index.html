@@ -71,7 +71,7 @@
   <body class="d-flex flex-column min-vh-100">
     {% load static %}
     <!-- NavBar-->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm">
       <button
         class="navbar-toggler"
         type="button"
@@ -217,7 +217,9 @@
 
       {% else %}
       <div>
-        <a href="{% url 'login' %}" class="btn btn-primary">Iniciar Sesión</a>
+        <a href="{% url 'form_login' %}" class="btn btn-primary"
+          >Iniciar Sesión</a
+        >
       </div>
       {% endif %}
 
