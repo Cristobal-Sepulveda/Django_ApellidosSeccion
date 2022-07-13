@@ -10,10 +10,10 @@ class Cliente(models.Model):
     correo = models.CharField(max_length=50, verbose_name="correo")
     telefono = models.CharField(max_length=15, verbose_name="telefono")
     direccion = models.CharField(max_length=30, verbose_name="direccion")
-    password1 = models.CharField(max_length=20, verbose_name="password1",blank=True, null=True)
-    password2 = models.CharField(max_length=20, verbose_name="password2",blank=True, null=True)
-    USERNAME_FIELD = 'rut'
-    set_password = 'password1'
+    password1 = models.CharField(max_length=20, verbose_name="password1")
+    password2 = models.CharField(max_length=20, verbose_name="password2")
+    USERNAME_FIELD = "rut"
+    set_password = "password1"
 
     def __str__(self):
         return self.rut

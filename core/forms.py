@@ -82,13 +82,13 @@ class ClienteForm(UserCreationForm):
     ))
     password1 = forms.CharField(max_length=16,widget=forms.PasswordInput(
         attrs={
-            # 'class':'form-control',
+             'class':'form-control',
             'placeholder':'Password'
         }
     ))
     password2 = forms.CharField(max_length=16,widget=forms.PasswordInput(
         attrs={
-            # 'class':'form-control',
+             'class':'form-control',
             'placeholder':'Repeat Password'
         }
     ))
@@ -159,12 +159,14 @@ class CreateUserForm(UserCreationForm):
     ))
     password1 = forms.CharField(widget=forms.PasswordInput(
         attrs={
+             'class':'form-control',
             'placeholder':'contraseña'
         }
     ))
 
     password2 = forms.CharField(widget=forms.PasswordInput(
         attrs={
+             'class':'form-control',
             'placeholder':'Repita contraseña'
         }
     ))
