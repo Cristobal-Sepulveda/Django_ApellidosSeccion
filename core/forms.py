@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.forms import widgets
 from django.forms.models import ModelChoiceField
@@ -46,18 +48,64 @@ class ProductoForm(forms.ModelForm):
 
         # }
 
-class ClienteForm(forms.ModelForm):
+class ClienteForm(UserCreationForm):
+
+    rut: forms.CharField(widget=forms.TextInput(
+        attrs={
+                'placeholder': 'Ingrese rut', 
+                'id': 'rut'
+              }
+    ))
+    nombre: forms.CharField(widget=forms.TextInput(
+        attrs={
+                'placeholder': 'Ingrese nombre', 
+                'id': 'nombre'
+              }
+    ))
+    correo: forms.CharField(widget=forms.TextInput(
+        attrs={
+                'placeholder': 'Ingrese correo', 
+                'id': 'correo'
+              }
+    ))
+    telefono: forms.CharField(widget=forms.TextInput(
+        attrs={
+                'placeholder': 'Ingrese telefono',
+                'id': 'telefono',
+              }
+    ))
+    direccion: forms.CharField(widget=forms.TextInput(
+        attrs={
+                'placeholder': 'Ingrese direccion',
+                'id': 'direccion',
+              }
+    ))
+    password1 = forms.CharField(max_length=16,widget=forms.PasswordInput(
+        attrs={
+            # 'class':'form-control',
+            'placeholder':'Password'
+        }
+    ))
+    password2 = forms.CharField(max_length=16,widget=forms.PasswordInput(
+        attrs={
+            # 'class':'form-control',
+            'placeholder':'Repeat Password'
+        }
+    ))
+    class Meta: 
+        model= Cliente
+        fields = ['rut', 'nombre', 'correo' , 'telefono', 'direccion', 'password1', 'password2']
+
+
+
+class LoginForm(forms.ModelForm):
 
     class Meta: 
         model= Cliente
-        fields = ['rut', 'nombre', 'correo' , 'telefono', 'direccion', 'contraseña']
+        fields = ['rut', 'password1']
         labels ={
-            'rut': 'rut', 
-            'nombre': 'Nombre', 
-            'correo': 'Correo',
-            'telefono': 'telefono',
-            'direccion': 'direccion',
-            'contraseña': 'contraseña'
+            'rut': 'rut',
+            'password1': 'password1'
         }
         widgets={
             'rut': forms.TextInput(
@@ -67,35 +115,7 @@ class ClienteForm(forms.ModelForm):
                     'id': 'rut'
                 }
             ), 
-            'nombre': forms.TextInput(
-                attrs={
-                    'class': 'form-control', 
-                    'placeholder': 'Ingrese nombre', 
-                    'id': 'nombre'
-                }
-            ), 
-            'correo': forms.TextInput(
-                attrs={
-                    'class': 'form-control', 
-                    'placeholder': 'Ingrese correo', 
-                    'id': 'correo'
-                }
-            ), 
-            'telefono': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese telefono',
-                    'id': 'telefono',
-                }
-            ),
-            'direccion': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese direccion',
-                    'id': 'direccion',
-                }
-            ),
-            'contraseña': forms.PasswordInput(
+            'password1': forms.PasswordInput(
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Ingrese contraseña',
@@ -105,31 +125,51 @@ class ClienteForm(forms.ModelForm):
 
         }
 
-
-class LoginForm(forms.ModelForm):
-
-    class Meta: 
-        fields = ['correo', 'contraseña']
-        labels ={
-            'correo': 'Correo',
-            'contraseña': 'contraseña'
+class CreateUserForm(UserCreationForm):
+    
+    rut = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'type': 'rut',
+            'placeholder':('rut')
         }
-        widgets={
-            'correo': forms.TextInput(
-                attrs={
-                    'class': 'form-control', 
-                    'placeholder': 'Ingrese correo', 
-                    'id': 'correo'
-                }
-            ), 
-            'contraseña': forms.PasswordInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese contraseña',
-                    'id':'contraseña'
-                }
-            ),
-
+    ))
+    nombre = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'type': 'nombre',
+            'placeholder':('nombre')
         }
+    )) 
+    correo = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'type':'correo',
+            'placeholder':('correo')
+        }
+    ))
+    telefono = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'type':'telefono',
+            'placeholder':('telefono')
+        }
+    ))
+    direccion = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'type':'direccion',
+            'placeholder':'direccion'
+        }
+    ))
+    password1 = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'placeholder':'contraseña'
+        }
+    ))
+
+    password2 = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'placeholder':'Repita contraseña'
+        }
+    ))
+    class Meta:
+        model = Cliente
+        fields = ['rut','nombre','correo','telefono','direccion','password1','password2']
 
  

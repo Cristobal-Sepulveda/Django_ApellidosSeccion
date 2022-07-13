@@ -76,7 +76,7 @@
 
   <body>
     <!-- NavBar-->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm">
       <button
         class="navbar-toggler"
         type="button"
@@ -97,7 +97,7 @@
         />
       </a>
 
-      <!-- Links -->
+      <!-- enlaces -->
       <div class="collapse navbar-collapse" id="opciones">
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -117,6 +117,25 @@
           <li>
             <text>Bienvenido a Art Plants</text>
           </li>
+          <div style="display: flex; position: absolute; right: 2%">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <p class="nav-link">Bienvenido @{{user.username}}</p>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'form_crear_cliente' %}"
+                >Crear cuenta</a
+              >
+            </li>
+            {% endif %}
+          </div>
         </ul>
       </div>
     </nav>

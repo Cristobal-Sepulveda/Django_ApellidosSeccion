@@ -1,6 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import Producto, Cliente
-from .forms import ProductoForm, ClienteForm
+from .forms import LoginForm, ProductoForm, ClienteForm
+from .models import Producto, Cliente, User
+from django.views import View
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 def index(request):
@@ -18,8 +24,38 @@ def contacto(request):
 def modal(request):
     return render(request, 'modal.html')
 
+def login(request):
+    if request.method=='GET':
+        form = LoginForm()
+        username = request.GET["rut"]
+        password = request.GET["password1"]
+        user = authenticate(username=username, password=password)
+        print(user)
+        if user is not None:
+            login(request,user)
+            return redirect('index')
+        else:
+            messages.info(request,'Login attemp failed.')
+            return redirect('login')
+    
+    return render(request, 'login.html',{'form':form})
+
 def form_login(request):
-    return render(request, 'form_login.html')
+    if request.method=='POST':
+        login_form = LoginForm(request.POST, request.FILES)
+        if login_form.is_valid():
+            rut_ingresado = request.POST["rut"]
+            contraseña_ingresada = request.POST["contraseña"]
+
+            try:
+                cliente = Cliente.objects.get(rut=rut_ingresado)
+                print(cliente)
+                return redirect('index')
+            except Cliente.DoesNotExist:
+                print("Usuario no Existe")
+    else:
+        login_form = LoginForm()
+    return render(request, 'form_login.html',{'login_form': login_form})
 
 def productos(request):
     productos = Producto.objects.all()
@@ -72,6 +108,8 @@ def form_crear_cliente(request):
         if cliente_form.is_valid():
             cliente_form.save()        #similar al insert
             return redirect('clientes')
+        else:
+            print(cliente_form.errors)
     else:
         cliente_form = ClienteForm()
     return render(request, 'form_crear_cliente.html', {'cliente_form': cliente_form})
