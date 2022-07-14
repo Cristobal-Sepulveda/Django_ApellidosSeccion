@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm, ProductoForm, ClienteForm
+from .forms import LoginForm, ProductoForm, ClienteForm, CreateUserForm
 from .models import Producto, Cliente, User
 from django.views import View
 from django.contrib import messages
@@ -106,6 +106,7 @@ def form_crear_cliente(request):
     if request.method=='POST':
         cliente_form = ClienteForm(request.POST)
         if cliente_form.is_valid():
+            print(cliente_form)
             cliente_form.save()        #similar al insert
             return redirect('clientes')
         else:
@@ -131,3 +132,15 @@ def form_del_cliente(request, id):
     cliente.delete()
     return redirect('clientes')
 
+def form_crear_usuario(request):
+    if request.method=='POST':
+        create_user_form = CreateUserForm(request.POST)
+        if create_user_form.is_valid():
+            print(create_user_form)
+            create_user_form.save()        #similar al insert
+            return redirect('index')
+        else:
+            print(create_user_form.errors)
+    else:
+        create_user_form = CreateUserForm()
+    return render(request, 'form_crear_usuario.html', {'create_user_form': create_user_form})

@@ -48,53 +48,46 @@ class ProductoForm(forms.ModelForm):
 
         # }
 
-class ClienteForm(UserCreationForm):
+class CreateUserForm(UserCreationForm):
 
-    rut: forms.CharField(widget=forms.TextInput(
+    username =  forms.CharField(widget=forms.TextInput(
         attrs={
-                'placeholder': 'Ingrese rut', 
-                'id': 'rut'
-              }
+            'placeholder': 'Ingrese username', 
+            'type': 'username'
+          }
     ))
-    nombre: forms.CharField(widget=forms.TextInput(
+    email = forms.EmailField(widget=forms.TextInput(
         attrs={
-                'placeholder': 'Ingrese nombre', 
-                'id': 'nombre'
-              }
+            'placeholder': 'Ingrese email',
+            'type':'email'
+        }
     ))
-    correo: forms.CharField(widget=forms.TextInput(
+    first_name = forms.CharField(widget=forms.TextInput(
         attrs={
-                'placeholder': 'Ingrese correo', 
-                'id': 'correo'
-              }
+            'type':'first_name',
+            'placeholder': 'Ingrese nombres', 
+        }
     ))
-    telefono: forms.CharField(widget=forms.TextInput(
+    last_name = forms.CharField(widget=forms.TextInput(
         attrs={
-                'placeholder': 'Ingrese telefono',
-                'id': 'telefono',
-              }
+            'type':'last_name',
+            'placeholder':('Last Name')
+        }
     ))
-    direccion: forms.CharField(widget=forms.TextInput(
-        attrs={
-                'placeholder': 'Ingrese direccion',
-                'id': 'direccion',
-              }
-    ))
+
     password1 = forms.CharField(max_length=16,widget=forms.PasswordInput(
         attrs={
-             'class':'form-control',
-            'placeholder':'Password'
+            'placeholder':'Ingrese Contraseña',
         }
     ))
     password2 = forms.CharField(max_length=16,widget=forms.PasswordInput(
         attrs={
-             'class':'form-control',
-            'placeholder':'Repeat Password'
+            'placeholder':'Repita Contraseña',
         }
     ))
     class Meta: 
-        model= Cliente
-        fields = ['rut', 'nombre', 'correo' , 'telefono', 'direccion', 'password1', 'password2']
+        model= User
+        fields = ['username','email','first_name','last_name','password1','password2']
 
 
 
@@ -125,7 +118,7 @@ class LoginForm(forms.ModelForm):
 
         }
 
-class CreateUserForm(UserCreationForm):
+class ClienteForm(UserCreationForm):
     
     rut = forms.CharField(widget=forms.TextInput(
         attrs={
@@ -171,7 +164,7 @@ class CreateUserForm(UserCreationForm):
         }
     ))
     class Meta:
-        model = Cliente
+        model = User
         fields = ['rut','nombre','correo','telefono','direccion','password1','password2']
 
  

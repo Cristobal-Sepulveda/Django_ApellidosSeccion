@@ -117,23 +117,44 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'contacto' %}">Contactanos</a>
           </li>
-          <li>
-            <text>Bienvenido a Art Plants</text>
-          </li>
           <div style="display: flex; position: absolute; right: 2%">
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and not user.is_superuser%}
             <li class="nav-item">
-              <p class="nav-link">Bienvenido @{{user.username}}</p>
+              <div class="row" style="margin-inline: 8px">
+                <img class="nav-item" src="{% static 'img/carrito.png' %}" />
+                <a class="nav-link" href="{% url 'productos' %}">
+                  Ver Carrito
+                </a>
+              </div>
             </li>
+            {% endif %} {% if user.is_authenticated %}
+            <li class="nav-item">
+              <p class="nav-link text-primary" style="color: #0000ff">
+                Bienvenido @{{user.username}}
+              </p>
+            </li>
+            {% endif %} {% if user.is_authenticated and user.is_superuser %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'productos' %}"
+                >Administrar Productos</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'productos' %}"
+                >Administrar Clientes</a
+              >
+            </li>
+            {% endif%} {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
             </li>
+
             {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'form_crear_cliente' %}"
+              <a class="nav-link" href="{% url 'form_crear_usuario' %}"
                 >Crear cuenta</a
               >
             </li>

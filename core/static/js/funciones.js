@@ -76,3 +76,54 @@ const requestAAPI = async (document) => {
     console.log("Looks like there was a problem: ", error);
   }
 };
+
+const dibujadoraDeTablaEnCarrito = () => {
+  let dibujadora = obtenerElListadoDeProductosEnElCarrito();
+  if (dibujadora.length === 0) {
+    return;
+  }
+  //limpio la tabla, así no habrá duplicidad de filas.
+  $("#tablaDelCarrito").find("tbody tr").remove();
+
+  let count = 1;
+  let totalAPagar = 0;
+  for (const element of dibujadora) {
+    $("#tablaDelCarrito")
+      .find("tbody")
+      .append(
+        "<tr>" +
+          '<th scope="row">' +
+          count +
+          "</th>" +
+          "<td>" +
+          element.nombre +
+          "</td>" +
+          "<td>" +
+          element.cantidad +
+          "</td>" +
+          "<td>" +
+          element.precioUnitario +
+          "</td>" +
+          "<td>" +
+          element.precioPorCantidad +
+          "</td>" +
+          "</tr>"
+      );
+    totalAPagar = totalAPagar + element.precioPorCantidad;
+    count++;
+  }
+
+  $("#tablaDelCarrito")
+    .find("tbody")
+    .append(
+      "<tr>" +
+        '<th style="border-bottom:0px" scope="row"></th>' +
+        '<td style="border-bottom:0px"></td>' +
+        '<td style="border-bottom:0px"></td>' +
+        '<td class="totalEnTabla" style="background-color:lightgrey;">Total:</td>' +
+        '<td class="totalEnTabla" style="background-color:lightgrey;">' +
+        totalAPagar +
+        "</td>" +
+        "</tr>"
+    );
+};
