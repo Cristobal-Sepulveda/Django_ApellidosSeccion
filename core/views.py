@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm, ProductoForm, ClienteForm, CreateUserForm
-from .models import Producto, Cliente, User
+from .models import Producto, Cliente
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
