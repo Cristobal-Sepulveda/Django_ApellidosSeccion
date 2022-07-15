@@ -14,18 +14,18 @@
 </button>
 
 <!-- Grid de productos-->
-<div id="tabla-precios">
-  <!-- Item 1 -->
+<div id="tabla-precios" style="height:100vh">
+  {% for producto in productos %}
   <div class="precio-col">
     <div class="precio-col-header">
       <p id="productoPrecio1" style="font-size: 26px; margin-bottom: 0px">
-        $15.000
+        {{producto.precio}}
       </p>
-      <p id="productoNombre1">Producto 1</p>
+      <p id="productoNombre1">{{producto.nombre}}</p>
     </div>
     <div class="precio-col-features">
       <img src="{% static 'img/repizas.jpg' %}" />
-      <p>Producto 1</p>
+      <p>{{producto.descripcion}}</p>
       <button
         class="botonAleatorio"
         data-dismiss="modal"
@@ -35,146 +35,8 @@
       </button>
     </div>
   </div>
-  <!-- Item 2 -->
-  <div class="precio-col">
-    <div class="precio-col-header">
-      <p id="productoPrecio2" style="font-size: 26px; margin-bottom: 0px">
-        $5.000
-      </p>
-      <p id="productoNombre2">Repisa 2</p>
-    </div>
-    <div class="precio-col-features">
-      <img src="{% static 'img/repizas.jpg' %}" />
-      <p>Repisa 2</p>
-      <button
-        class="botonAleatorio"
-        data-dismiss="modal"
-        onclick="agregarAlCarrito(productoNombre2, productoPrecio2)"
-      >
-        Añadir al carrito
-      </button>
-    </div>
-  </div>
-  <!-- Item 3 -->
-  <div class="precio-col">
-    <div class="precio-col-header">
-      <p id="productoPrecio3" style="font-size: 26px; margin-bottom: 0px">
-        $8.000
-      </p>
-      <p id="productoNombre3">Repisa 3</p>
-    </div>
-    <div class="precio-col-features">
-      <img src="{% static 'img/repizas.jpg' %}" />
-      <p>Repisa 3</p>
-      <button
-        class="botonAleatorio"
-        data-dismiss="modal"
-        onclick="agregarAlCarrito(productoNombre3, productoPrecio3)"
-      >
-        Añadir al carrito
-      </button>
-    </div>
-  </div>
-  <!-- Item 4 -->
-  <div class="precio-col">
-    <div class="precio-col-header">
-      <p id="productoPrecio4" style="font-size: 26px; margin-bottom: 0px">
-        $3.990
-      </p>
-      <p id="productoNombre4">Repisa 4</p>
-    </div>
-    <div class="precio-col-features">
-      <img src="{% static 'img/repizas.jpg' %}" />
-      <p>Repisa 4</p>
-      <button
-        class="botonAleatorio"
-        data-dismiss="modal"
-        onclick="agregarAlCarrito(productoNombre4, productoPrecio4)"
-      >
-        Añadir al carrito
-      </button>
-    </div>
-  </div>
-  <!-- Item 5 -->
-  <div class="precio-col">
-    <div class="precio-col-header">
-      <p id="productoPrecio5" style="font-size: 26px; margin-bottom: 0px">
-        $6.990
-      </p>
-      <p id="productoNombre5">Repisa 5</p>
-    </div>
-    <div class="precio-col-features">
-      <img src="{% static 'img/repizas.jpg' %}" />
-      <p>Repisa 5</p>
-      <button
-        class="botonAleatorio"
-        data-dismiss="modal"
-        onclick="agregarAlCarrito(productoNombre5, productoPrecio5)"
-      >
-        Añadir al carrito
-      </button>
-    </div>
-  </div>
-  <!-- Item 6 -->
-  <div class="precio-col">
-    <div class="precio-col-header">
-      <p id="productoPrecio6" style="font-size: 26px; margin-bottom: 0px">
-        $49.990
-      </p>
-      <p id="productoNombre6">Repisa Bamboo multiuso</p>
-    </div>
-    <div class="precio-col-features">
-      <img src="{% static 'img/rack-bamboo-multiuso.jpg' %}" />
-      <p>Repisa 6</p>
-      <button
-        class="botonAleatorio"
-        data-dismiss="modal"
-        onclick="agregarAlCarrito(productoNombre6, productoPrecio6)"
-      >
-        Añadir al carrito
-      </button>
-    </div>
-  </div>
-  <!-- Item 7 -->
-  <div class="precio-col">
-    <div class="precio-col-header">
-      <p id="productoPrecio7" style="font-size: 26px; margin-bottom: 0px">
-        $79.990
-      </p>
-      <p id="productoNombre7">Repisa exclusive</p>
-    </div>
-    <div class="precio-col-features">
-      <img src="{% static 'img/repizas.jpg' %}" />
-      <p>Repisa 7</p>
-      <button
-        class="botonAleatorio"
-        data-dismiss="modal"
-        onclick="agregarAlCarrito(productoNombre7, productoPrecio7)"
-      >
-        Añadir al carrito
-      </button>
-    </div>
-  </div>
-  <!-- Item 8 -->
-  <div class="precio-col">
-    <div class="precio-col-header">
-      <p id="productoPrecio8" style="font-size: 26px; margin-bottom: 0px">
-        $129.990
-      </p>
-      <p id="productoNombre8">Repisa elite</p>
-    </div>
-    <div class="precio-col-features">
-      <img src="{% static 'img/repisaelite.jpeg' %}" />
-      <p>Repisa 8</p>
-      <button
-        class="botonAleatorio"
-        data-dismiss="modal"
-        onclick="agregarAlCarrito(productoNombre8, productoPrecio8)"
-      >
-        Añadir al carrito
-      </button>
-    </div>
-  </div>
+  {% endfor %}
+
 </div>
 
 {% endblock %}

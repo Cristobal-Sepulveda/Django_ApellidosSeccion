@@ -1,35 +1,29 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<div class="container">
+<div class="container"style="height:110vh">
   <h2>Mostrando Clientes</h2>
 
   <table class="table">
     <thead>
       <tr>
-        <th>RUT</th>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>Teléfono</th>
-        <th>Dirección</th>
-        <th>password1</th>
-        <th>password2</th>
+        <th>username</th>
+        <th>email</th>
+        <th>first_name</th>
+        <th>last_name</th>
         <th>Modificar Cliente</th>
         <th>Eliminar Cliente</th>
       </tr>
     </thead>
     <tbody>
-      {% for cliente in clientes %}
+      {% for item in userr %}
       <tr>
-        <td>{{ cliente.rut }}</td>
-        <td>{{ cliente.nombre }}</td>
-        <td>{{ cliente.correo }}</td>
-        <td>{{ cliente.telefono }}</td>
-        <td>{{ cliente.direccion }}</td>
-        <td>{{ cliente.password1 }}</td>
-        <td>{{ cliente.password2 }}</td>
+        <td>{{ item.username }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.first_name }}</td>
+        <td>{{ item.last_name }}</td>
         {% if user.is_authenticated and user.is_superuser %}
         <td>
           <a
-            href="{% url 'form_mod_cliente' cliente.rut %}"
+            href="{% url 'form_mod_cliente' item.id %}"
             class="btn btn-primary"
           >
             Modificar</a
@@ -37,7 +31,7 @@
         </td>
         <td>
           <a
-            href="{% url 'form_del_cliente' cliente.rut %}"
+            href="{% url 'form_del_cliente' item.id %}"
             class="btn btn-danger"
           >
             Eliminar</a

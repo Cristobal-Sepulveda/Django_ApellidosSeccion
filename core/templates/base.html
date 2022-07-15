@@ -19,7 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
   </head>
 
-  <body class="d-flex flex-column min-vh-100">
+  <body>
     <!-- NavBar-->
     <nav class="navbar navbar-expand-sm">
       <button
@@ -64,9 +64,9 @@
             <li class="nav-item">
               <div class="row" style="margin-inline: 8px">
                 <img class="nav-item" src="{% static 'img/carrito.png' %}" />
-                <p class="nav-link" onclick="dibujadoraDeTablaEnCarrito()">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCarrito">
                   Ver Carrito
-                </p>
+                </button>
               </div>
             </li>
             {% endif %} {% if user.is_authenticated %}
@@ -76,26 +76,26 @@
               </p>
             </li>
             {% endif %} {% if user.is_authenticated and user.is_superuser %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'productos' %}"
+            <li class="nav-item" >
+              <a class="nav-link " href="{% url 'productos' %}"
                 >Administrar Productos</a
               >
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'clientes' %}"
+            <li class="nav-item" >
+              <a class="nav-link " href="{% url 'clientes' %}"
                 >Administrar Clientes</a
               >
             </li>
             {% endif%} {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+            <li class="nav-item" >
+              <a class="nav-link " href="{% url 'logout' %}">Cerrar Sesión</a>
             </li>
 
             {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+            <li class="nav-item " >
+              <a class="nav-link " href="{% url 'login' %}">Iniciar sesión</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
               <a class="nav-link" href="{% url 'form_crear_usuario' %}"
                 >Crear cuenta</a
               >
@@ -170,6 +170,7 @@
         </a>
       </div>
     </footer>
+
     <!-- Modal Carrito -->
     <div class="modal fade" id="modalCarrito" role="dialog">
       <div class="modal-dialog">

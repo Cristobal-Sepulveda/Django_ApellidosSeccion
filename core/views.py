@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm, ProductoForm, ClienteForm, CreateUserForm
 from .models import Producto, Cliente
+from django.contrib.auth.models import User
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -13,7 +14,12 @@ def index(request):
     return render(request, 'index.html')
 
 def galeria(request):
-    return render(request, 'galeria.html')
+    productos = Producto.objects.all()
+    print(productos.values())
+    datos = {
+        'productos': productos
+    }
+    return render(request, 'galeria.html', datos)  
 
 def somos(request):
     return render(request, 'somos.html')
@@ -59,6 +65,7 @@ def form_login(request):
 
 def productos(request):
     productos = Producto.objects.all()
+    print(productos.values())
     datos = {
         'productos': productos
     }
@@ -96,9 +103,9 @@ def form_del_producto(request, id):
     return redirect('productos')
 
 def clientes(request) :
-    clientes = Cliente.objects.all()
+    userr = User.objects.all()
     datos = {
-        'clientes': clientes
+        'userr': userr
     }
     return render(request, 'clientes.html', datos)
 
@@ -116,19 +123,20 @@ def form_crear_cliente(request):
     return render(request, 'form_crear_cliente.html', {'cliente_form': cliente_form})
 
 def form_mod_cliente(request, id):
-    cliente = Cliente.objects.get(rut=id)
+    userr = User.objects.get(id=id)
     datos = {
-        'form': ClienteForm(instance = cliente)
+        'form': CreateUserForm(instance = userr)
     }
     if request.method=='POST':
-        formulario = ClienteForm(data=request.POST, instance = cliente)
+        formulario = CreateUserForm(data=request.POST, instance = userr)
         if formulario.is_valid():
             formulario.save()
             return redirect('clientes')
+        print(formulario.error_messages)
     return render(request, 'form_mod_cliente.html', datos)
 
 def form_del_cliente(request, id):
-    cliente = Cliente.objects.get(rut=id)
+    cliente = Cliente.objects.get(id=id)
     cliente.delete()
     return redirect('clientes')
 
