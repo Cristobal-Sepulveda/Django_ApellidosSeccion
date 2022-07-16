@@ -27,8 +27,8 @@ def somos(request):
 def contacto(request):
     return render(request, 'contacto.html')
 
-def modal(request):
-    return render(request, 'modal.html')
+def carrito(request):
+    return render(request, 'carrito.html')
 
 def login(request):
     if request.method=='GET':

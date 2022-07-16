@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Modal Carrito -->
+
+          <!-- Modal BOX-->
+          <div class="center" style="height:100vh">
+            <!--Modal Header-->
+            <div id="modalHeader" >
+             <p style="text-align:center;font-size:24px"> Estas a un paso de confirmar tu pedido</p>
+            </div>
+  
+            <!--Modal Body-->
+            <div class="modal-body">
+              <!--Título del carrito-->
+              <p style="text-align: center; font-size: 25px">
+                Listado de productos
+              </p>
+              <button onclick="requestAAPI(document)">ValorUF</button>
+              <label>Precio UF: </label>
+              <p id="precioUF"></p>
+              <!--Formulario-->
+              <div class="table-responsive">
+                <table id="tablaDelCarrito" class="table table-sm">
+                  <!--Encabezados de la tabla-->
+                  <thead style="background-color: lightgrey">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Producto</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Precio unitario</th>
+                      <th scope="col">Precio por productos</th>
+                    </tr>
+                  </thead>
+  
+                  <!--Contenido del precio por el carrito-->
+                  <tbody>
+                    
+                  </tbody>
+                </table>
+              </div>
+              <img
+                id="imagenCarrito"
+                src="{% static 'img/logo.jpg' %}"
+                style="width: 80%; height: 350px; border-radius: 10px"
+                class="center"
+                onmouseenter="desapareceImagen(document)"
+                onmouseleave="reapareceImagen(document)"
+              />
+              <!--Botones del carrito-->
+              <div class="botonesModal">
+                <button class="botonAleatorio" onclick="irATransbank()">
+                  Pagar
+                </button>
+                <a class="botonAleatorio" href="{% url 'index'%}">
+                  Volver
+                 
+                </a>
+              </div>
+            </div>
+  
+            <!--Modal Footer-->
+            <!-- <div class="modal-footer">
+                        <button type="button" class="botonAleatorio" data-dismiss="modal">Volver</button>
+                        </div> -->
+          </div>
+
+{% endblock %}

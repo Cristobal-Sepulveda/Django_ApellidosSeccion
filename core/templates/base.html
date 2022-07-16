@@ -17,6 +17,7 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <script src="{% static 'js/funciones.js'%}"></script>
   </head>
 
   <body>
@@ -62,12 +63,10 @@
           <div style="display: flex; position: absolute; right: 2%">
             {% if user.is_authenticated and not user.is_superuser%}
             <li class="nav-item">
-              <div class="row" style="margin-inline: 8px">
                 <img class="nav-item" src="{% static 'img/carrito.png' %}" />
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCarrito">
+                <a class="btn btn-primary" href="{% url 'carrito' %}">
                   Ver Carrito
-                </button>
-              </div>
+                </a>
             </li>
             {% endif %} {% if user.is_authenticated %}
             <li class="nav-item">
@@ -171,76 +170,5 @@
       </div>
     </footer>
 
-    <!-- Modal Carrito -->
-    <div class="modal fade" id="modalCarrito" role="dialog">
-      <div class="modal-dialog">
-        <!-- Modal BOX-->
-        <div class="modal-content">
-          <!--Modal Header-->
-          <div id="modalHeader" class="modal-header">
-            <h4 class="modal-title">Estas a un paso de confirmar tu pedido</h4>
-            <button
-              id="botonX"
-              type="button"
-              class="close"
-              data-dismiss="modal"
-            >
-              &times;
-            </button>
-          </div>
-
-          <!--Modal Body-->
-          <div class="modal-body">
-            <!--Título del carrito-->
-            <p style="text-align: center; font-size: 25px">
-              Listado de productos
-            </p>
-            <button onclick="requestAAPI(document)">ValorUF</button>
-            <label>Precio UF: </label>
-            <p id="precioUF"></p>
-            <!--Formulario-->
-            <div class="table-responsive">
-              <table id="tablaDelCarrito" class="table table-sm">
-                <!--Encabezados de la tabla-->
-                <thead style="background-color: lightgrey">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Precio unitario</th>
-                    <th scope="col">Precio por productos</th>
-                  </tr>
-                </thead>
-
-                <!--Contenido del precio por el carrito-->
-                <tbody></tbody>
-              </table>
-            </div>
-            <img
-              id="imagenCarrito"
-              src="{% static 'img/logo.jpg' %}"
-              style="width: 80%; height: 350px; border-radius: 10px"
-              class="center"
-              onmouseenter="desapareceImagen(document)"
-              onmouseleave="reapareceImagen(document)"
-            />
-            <!--Botones del carrito-->
-            <div class="botonesModal">
-              <button class="botonAleatorio" onclick="irATransbank()">
-                Pagar
-              </button>
-              <button type="button" class="botonAleatorio" data-dismiss="modal">
-                Volver
-              </button>
-            </div>
-          </div>
-
-          <!--Modal Footer-->
-          <!-- <div class="modal-footer">
-                      <button type="button" class="botonAleatorio" data-dismiss="modal">Volver</button>
-                      </div> -->
-        </div>
-      </div>
-    </div>
   </body>
 </html>

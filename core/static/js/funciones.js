@@ -1,5 +1,8 @@
 let listadoDeProductos = [];
 
+const asd = () => {
+  console.log("hola")
+}
 //esta funcion agrega al carrito un producto....
 const agregarAlCarrito = (nombre, precioUnitario) => {
   //obtengo los strings...
@@ -7,7 +10,6 @@ const agregarAlCarrito = (nombre, precioUnitario) => {
   const auxPrecioUnitario = parseInt(
     precioUnitario.innerText.slice(1).replace(".", "")
   );
-
   //creo el objeto
   const productoAIngresar = {
     nombre: auxNombre,
